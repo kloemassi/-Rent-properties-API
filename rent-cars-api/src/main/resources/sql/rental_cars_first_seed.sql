@@ -1,0 +1,1 @@
+INSERT INTO rental_car (brand,model,rent_amount,security_deposit_amount,number_of_seats,number_of_doors,has_air_conditioning) VALUES ('BMW', 'X5', 300.0, 500.0, 7, 4, TRUE)
