@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>fr.esgi</groupId>
-    <artifactId>rent-cars-api</artifactId>
+    <artifactId>rent-properties-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>rent-properties-api</name>
 
