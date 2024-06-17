@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RentalCarRepository extends JpaRepository<RentalPropertyEntity, Integer> {
+public interface RentalPropertyRepository extends JpaRepository<RentalPropertyEntity, Integer> {
     @Override
     List<RentalPropertyEntity> findAll();
 

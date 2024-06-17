@@ -2,7 +2,7 @@ package fr.esgi.api;
 
 import fr.esgi.domain.RentalPropertyEntity;
 import fr.esgi.dto.RentalPropertyDTO;
-import fr.esgi.repository.RentalCarRepository;
+import fr.esgi.repository.RentalPropertyRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Valid;
 import jakarta.validation.Validator;
@@ -20,12 +20,12 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/rent-properties-api/rental-properties")
-public class RentalCarResource {
-    private final RentalCarRepository repository;
+public class RentalPropertyResource {
+    private final RentalPropertyRepository repository;
 
     private final Validator validator;
 
-    public RentalCarResource(@Autowired RentalCarRepository repository, @Autowired Validator validator) {
+    public RentalPropertyResource(@Autowired RentalPropertyRepository repository, @Autowired Validator validator) {
         this.repository = repository;
         this.validator = validator;
     }
