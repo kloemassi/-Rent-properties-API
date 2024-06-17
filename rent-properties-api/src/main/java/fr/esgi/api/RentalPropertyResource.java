@@ -45,8 +45,8 @@ public class RentalPropertyResource {
     }
 
     @PostMapping()
-    public ResponseEntity<RentalPropertyDTO> createRentalCar(@RequestBody RentalPropertyDTO rentalCarData) throws URISyntaxException {
-        RentalPropertyEntity savedRentalCar = repository.saveAndFlush(rentalCarData.toEntity());
+    public ResponseEntity<RentalPropertyDTO> createRentalCar(@Valid @RequestBody RentalPropertyEntity rentalProperty) throws URISyntaxException {
+        RentalPropertyEntity savedRentalCar = repository.saveAndFlush(rentalProperty);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -57,27 +57,24 @@ public class RentalPropertyResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RentalPropertyDTO> updateOrCreateRentalCar(@PathVariable Integer id, @RequestBody RentalPropertyDTO rentalCarData) {
+    public ResponseEntity<RentalPropertyDTO> updateOrCreateRentalCar(@PathVariable Integer id, @Valid @RequestBody RentalPropertyEntity rentalProperty) {
         Optional<RentalPropertyEntity> rentalCar = repository.findById(id);
 
-        RentalPropertyEntity updatedRentalCar = rentalCarData.toEntity();
         if (rentalCar.isPresent()) {
-            updatedRentalCar.setId(rentalCar.get().getId());
-            repository.saveAndFlush(updatedRentalCar);
+            rentalProperty.setId(rentalCar.get().getId());
+            repository.saveAndFlush(rentalProperty);
         } else {
-            repository.saveAndFlush(updatedRentalCar);
+            repository.saveAndFlush(rentalProperty);
         }
 
         return ResponseEntity.ok(null);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> updateRentalCar(@PathVariable Integer id, @Valid @RequestBody RentalPropertyDTO rentalCarData) {
+    public ResponseEntity<?> updateRentalCar(@PathVariable Integer id, @Valid @RequestBody RentalPropertyEntity rentalPropertyData) {
         Optional<RentalPropertyEntity> rentalCar = repository.findById(id);
 
-        RentalPropertyEntity updatedRentalCar = rentalCarData.toEntity();
-
-        Set<ConstraintViolation<RentalPropertyEntity>> violations = validator.validate(updatedRentalCar);
+        Set<ConstraintViolation<RentalPropertyEntity>> violations = validator.validate(rentalPropertyData);
         if (!violations.isEmpty()) {
             return ResponseEntity.badRequest().body(
                     violations
@@ -89,8 +86,8 @@ public class RentalPropertyResource {
         }
 
         if (rentalCar.isPresent()) {
-            updatedRentalCar.setId(rentalCar.get().getId());
-            repository.saveAndFlush(updatedRentalCar);
+            rentalPropertyData.setId(rentalCar.get().getId());
+            repository.saveAndFlush(rentalPropertyData);
         } else {
             return ResponseEntity.notFound().build();
         }

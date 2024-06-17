@@ -1,10 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <include file="/db/changelog/1.0.0.xml"/>
+    <changeSet id="create-rental-property-1.0.0" author="marcmalha">
+        <createTable tableName="rental_property">
+            <column name="id" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="description" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="town" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="property_type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rent_amount" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="security_deposit_amount" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="area" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="number_of_bedrooms" type="INTEGER"/>
+            <column name="floor_number" type="INTEGER"/>
+            <column name="number_of_floors" type="INTEGER"/>
+            <column name="construction_year" type="CHAR(4)"/>
+            <column name="energy_classification" type="VARCHAR(1)"/>
+            <column name="has_elevator" type="BOOLEAN"/>
+            <column name="has_intercom" type="BOOLEAN"/>
+            <column name="has_balcony" type="BOOLEAN"/>
+            <column name="has_parking_space" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="insert-rental-property-1.0.1" author="marcmalha">
+        <insert tableName="rental_property">
+            <column name="description" value="Appartement bien situé près du métro et des commerces"/>
+            <column name="town" value="Neuilly-sur-Seine"/>
+            <column name="address" value="90 rue de la Victoire"/>
+            <column name="property_type" value="FLAT"/>
+            <column name="rent_amount" valueNumeric="1040.9"/>
+            <column name="security_deposit_amount" valueNumeric="1250.9"/>
+            <column name="area" valueNumeric="50.69"/>
+            <column name="number_of_bedrooms" valueNumeric="3"/>
+            <column name="floor_number" valueNumeric="2"/>
+            <column name="number_of_floors" valueNumeric="5"/>
+            <column name="construction_year" value="1989"/>
+            <column name="energy_classification" value="B"/>
+            <column name="has_elevator" valueBoolean="true"/>
+            <column name="has_intercom" valueBoolean="true"/>
+            <column name="has_balcony" valueBoolean="true"/>
+            <column name="has_parking_space" valueBoolean="true"/>
+        </insert>
+    </changeSet>
 
 </databaseChangeLog>
